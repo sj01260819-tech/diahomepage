@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><title>DIA | 국내 병원 마케팅·중화권 고객 유치</title><meta name="description" content="병원 현장에서 시작한 DIA가 국내 병원 마케팅부터 MEDIAT 해외환자 유치, DIAT 중화권 방한 고객 유치까지 설계하고 실행합니다."><meta property="og:title" content="DIA | 국내 병원 마케팅·중화권 고객 유치"><meta property="og:description" content="현장에서 검증한 성장 전략으로, 한국의 병원과 브랜드를 중화권 고객에게 연결합니다."><meta property="og:type" content="website"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
+body{margin:0;background:#F7F7F5}html{scrollbar-width:none}html::-webkit-scrollbar{width:0}*{box-sizing:border-box}
+a{color:#6653D9;text-decoration:none}a:hover{color:#4f3fc0}
+input,textarea,button{font-family:Pretendard,system-ui,sans-serif}
+input:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid #6653D9;outline-offset:2px}
+@keyframes dia-mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+[data-mq]{animation:dia-mq 28s linear infinite;will-change:transform}
+[data-mq]:hover,[data-mq]:focus-within{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){[data-mq]{animation:none}}
+</style></helmet>
+<div ref="{{ rootRef }}" style="background:#F7F7F5;font-family:Pretendard,system-ui,sans-serif;color:#121722;overflow-x:hidden;position:relative">
+
+<header style="{{ headStyle }}">
+<div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px);height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px">
+<div onClick="{{ nav.hero }}" role="button" tabindex="0" style="cursor:pointer;display:flex;align-items:center;flex:none">
+<img src="assets/dia-logo.png" alt="DIA" style="{{ logoStyle }}">
+</div>
+<sc-if value="{{ isDesk }}" hint-placeholder-val="{{ true }}">
+<nav style="display:flex;align-items:center;gap:clamp(14px,2vw,30px)">
+<sc-for list="{{ navItems }}" as="n" hint-placeholder-count="7">
+<span onClick="{{ n.on }}" role="link" tabindex="0" style="{{ n.style }}">{{ n.label }}</span>
+</sc-for>
+</nav>
+<div style="display:flex;align-items:center;gap:12px;flex:none">
+<div style="{{ langWrap }}">
+<span onClick="{{ setKo }}" role="button" tabindex="0" style="{{ koTab }}">한국어</span>
+<span onClick="{{ setZh }}" role="button" tabindex="0" style="{{ zhTab }}">中文</span>
+</div>
+<span onClick="{{ nav.contact }}" role="button" tabindex="0" style="height:44px;padding:0 20px;border-radius:12px;background:#6653D9;color:#fff;display:grid;place-items:center;font:700 14px Pretendard,sans-serif;cursor:pointer;white-space:nowrap" style-hover="background:#5744c4">{{ topCta }}</span>
+</div>
+</sc-if>
+<sc-if value="{{ isMob }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;align-items:center;gap:10px">
+<div style="{{ langWrap }}">
+<span onClick="{{ setKo }}" role="button" tabindex="0" style="{{ koTab }}">한</span>
+<span onClick="{{ setZh }}" role="button" tabindex="0" style="{{ zhTab }}">中</span>
+</div>
+<div onClick="{{ toggleNav }}" role="button" tabindex="0" aria-label="menu" aria-expanded="{{ navOpen }}" style="{{ burger }}">
+<div style="{{ burgerLine }}"></div><div style="{{ burgerLine }}"></div><div style="{{ burgerLine }}"></div>
+</div>
+</div>
+</sc-if>
+</div>
+</header>
+
+<sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:fixed;inset:0;z-index:60;background:#fff;display:flex;flex-direction:column;padding:20px clamp(20px,6vw,40px) 32px">
+<div style="display:flex;align-items:center;justify-content:space-between;height:52px;flex:none">
+<img src="assets/dia-logo.png" alt="DIA" style="height:22px;width:auto;display:block">
+<div onClick="{{ toggleNav }}" role="button" tabindex="0" aria-label="close" style="width:42px;height:42px;border-radius:12px;border:1px solid rgba(18,23,34,.12);display:grid;place-items:center;font:400 20px Manrope,sans-serif;color:#121722;cursor:pointer">✕</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:2px;margin-top:24px">
+<sc-for list="{{ navItems }}" as="n" hint-placeholder-count="7">
+<span onClick="{{ n.on }}" role="link" tabindex="0" style="font:600 20px/1.2 Pretendard,sans-serif;color:#121722;padding:16px 0;border-bottom:1px solid rgba(18,23,34,.07);cursor:pointer">{{ n.label }}</span>
+</sc-for>
+</div>
+<div onClick="{{ nav.contact }}" role="button" tabindex="0" style="margin-top:auto;height:56px;border-radius:14px;background:#6653D9;color:#fff;display:grid;place-items:center;font:700 15px Pretendard,sans-serif;cursor:pointer">{{ topCta }}</div>
+</div>
+</sc-if>
+
+<section data-anchor="hero" style="background:#fff;padding:clamp(56px,7vw,104px) 0 clamp(48px,6vw,88px);position:relative;overflow:hidden;scroll-margin-top:76px">
+<div style="position:absolute;right:-8%;top:-14%;width:min(720px,60vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(102,83,217,.13),transparent 66%)"></div>
+<div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px);position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(32px,4vw,64px);align-items:center">
+<div>
+<p style="font:600 clamp(10px,.8vw,11.5px)/1.6 Manrope,sans-serif;letter-spacing:.16em;color:#6653D9;margin:0 0 clamp(16px,1.6vw,22px)">FROM LOCAL EXPERTISE TO GREATER CHINA GROWTH</p>
+<h1 style="font:700 clamp(34px,4.4vw,62px)/1.24 Pretendard,sans-serif;letter-spacing:-.03em;margin:0 0 clamp(18px,2vw,26px);text-wrap:pretty">{{ c.h1a }}<br>{{ c.h1b }}<br><span style="background:linear-gradient(94deg,#6653D9,#1577FF 68%,#10C5D6);-webkit-background-clip:text;color:transparent">{{ c.h1c }}</span></h1>
+<p style="font:400 clamp(14px,1.15vw,17px)/1.8 Pretendard,sans-serif;color:#667085;margin:0 0 clamp(24px,2.6vw,36px);max-width:600px;text-wrap:pretty">{{ c.heroDesc }}</p>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<span onClick="{{ nav.contact }}" role="button" tabindex="0" style="height:56px;padding:0 26px;border-radius:14px;background:#6653D9;color:#fff;display:grid;place-items:center;font:700 15px Pretendard,sans-serif;cursor:pointer;box-shadow:0 10px 26px rgba(102,83,217,.26)" style-hover="background:#5744c4">{{ c.cta1 }}</span>
+<span onClick="{{ nav.mediat }}" role="button" tabindex="0" style="height:56px;padding:0 26px;border-radius:14px;border:1px solid rgba(18,23,34,.16);color:#121722;display:grid;place-items:center;font:600 15px Pretendard,sans-serif;cursor:pointer" style-hover="background:#F7F7F5">{{ c.cta2 }}</span>
+</div>
+</div>
+<div style="position:relative">
+<div style="position:relative;border-radius:24px;background:linear-gradient(150deg,#F6F5FD,#EDF4FF 62%,#EAFAFB);border:1px solid rgba(102,83,217,.12);padding:clamp(22px,2.4vw,34px)">
+<svg viewBox="0 0 480 120" width="100%" height="clamp(80px,9vw,120px)" aria-hidden="true" style="display:block;margin-bottom:clamp(14px,1.6vw,22px)"><defs><linearGradient id="wg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6653D9"/><stop offset=".55" stop-color="#1577FF"/><stop offset="1" stop-color="#10C5D6"/></linearGradient></defs><path d="M16 96 C 120 96, 130 22, 240 22 S 350 96, 464 34" fill="none" stroke="url(#wg)" stroke-width="2.6" stroke-linecap="round"/><path d="M16 110 C 140 110, 156 60, 276 60 S 372 106, 464 82" fill="none" stroke="rgba(18,23,34,.1)" stroke-width="1.4"/><circle cx="16" cy="96" r="6" fill="#6653D9"/><circle cx="240" cy="22" r="6" fill="#1577FF"/><circle cx="464" cy="34" r="6" fill="#10C5D6"/></svg>
+<div style="display:flex;justify-content:space-between;font:600 10.5px Manrope,sans-serif;letter-spacing:.1em;color:#667085;margin-bottom:clamp(18px,2vw,26px)"><span>SEOUL</span><span>GREATER CHINA</span></div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="background:#fff;border-radius:16px;padding:16px 18px;border:1px solid rgba(102,83,217,.16);display:flex;align-items:center;gap:12px">
+<span style="width:10px;height:10px;border-radius:50%;background:#6653D9;flex:none"></span>
+<div><p style="font:700 15px Pretendard,sans-serif;margin:0 0 2px">DIA</p><p style="font:400 12.5px Pretendard,sans-serif;color:#667085;margin:0">{{ c.hvDia }}</p></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:10px">
+<div onClick="{{ nav.mediat }}" role="button" tabindex="0" style="background:#fff;border-radius:16px;padding:16px 18px;border:1px solid rgba(21,119,255,.2);cursor:pointer" style-hover="border-color:#1577FF">
+<span style="width:8px;height:8px;border-radius:50%;background:#1577FF;display:block;margin-bottom:10px"></span>
+<p style="font:700 14.5px Manrope,sans-serif;margin:0 0 3px">MEDIAT</p><p style="font:400 12px/1.5 Pretendard,sans-serif;color:#667085;margin:0">{{ c.hvMd }}</p>
+</div>
+<div onClick="{{ nav.diat }}" role="button" tabindex="0" style="background:#fff;border-radius:16px;padding:16px 18px;border:1px solid rgba(255,114,94,.24);cursor:pointer" style-hover="border-color:#FF725E">
+<span style="width:8px;height:8px;border-radius:50%;background:#FF725E;display:block;margin-bottom:10px"></span>
+<p style="font:700 14.5px Manrope,sans-serif;margin:0 0 3px">DIAT</p><p style="font:400 12px/1.5 Pretendard,sans-serif;color:#667085;margin:0">{{ c.hvDt }}</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section data-anchor="partners" style="background:#fff;padding:clamp(36px,4vw,56px) 0;border-top:1px solid rgba(18,23,34,.07);scroll-margin-top:76px">
+<div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px)">
+<p style="font:600 clamp(15px,1.4vw,20px)/1.5 Pretendard,sans-serif;color:#121722;margin:0 0 clamp(18px,2vw,28px);text-align:center;text-wrap:pretty">{{ c.partnerTitle }}</p>
+</div>
+<div style="overflow:hidden">
+<div data-mq style="display:flex;width:max-content">
+<sc-for list="{{ logos }}" as="p" hint-placeholder-count="12">
+<div style="flex:none;margin-right:12px;border-radius:14px;overflow:hidden;{{ p.card }}">
+<img src="{{ p.src }}" alt="{{ p.alt }}" loading="lazy" style="{{ p.img }}">
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section data-anchor="about" style="padding:clamp(56px,6.5vw,104px) 0;scroll-margin-top:76px">
+<div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px)">
+<p style="font:600 10.5px Manrope,sans-serif;letter-spacing:.16em;color:#6653D9;margin:0 0 16px">ONE COMPANY, TWO GROWTH ROUTES</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,3vw,56px);align-items:start;margin-bottom:clamp(32px,3.4vw,52px)">
+<h2 style="font:700 clamp(26px,2.8vw,42px)/1.34 Pretendard,sans-serif;letter-spacing:-.025em;margin:0;text-wrap:pretty">{{ c.aboutTitle }}</h2>
+<p style="font:400 clamp(14px,1.05vw,16px)/1.85 Pretendard,sans-serif;color:#667085;margin:0;text-wrap:pretty">{{ c.aboutBody }}</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(16px,1.8vw,24px)">
+<div style="background:#fff;border-radius:24px;border:1px solid rgba(11,59,117,.12);overflow:hidden">
+<div style="height:clamp(120px,12vw,164px);background:linear-gradient(112deg,#0B3B75,#1577FF 62%,#10C5D6);position:relative;display:flex;align-items:flex-end;padding:0 clamp(22px,2.4vw,32px) clamp(18px,2vw,24px)">
+<svg viewBox="0 0 560 164" width="100%" height="100%" aria-hidden="true" style="position:absolute;left:0;top:0"><path d="M-10 124 C 110 124, 124 34, 250 52 S 440 132, 570 44" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.8"/><path d="M-10 148 C 130 148, 160 72, 300 84 S 460 146, 570 88" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1.6"/></svg>
+<div style="position:relative"><p style="font:700 clamp(22px,2vw,30px) Manrope,sans-serif;color:#fff;margin:0;letter-spacing:.02em">MEDIAT</p><p style="font:500 clamp(12px,1vw,14px) Pretendard,sans-serif;color:rgba(255,255,255,.84);margin:4px 0 0">{{ c.mdKo }}</p></div>
+</div>
+<div style="padding:clamp(22px,2.4vw,32px)">
+<p style="font:600 10px Manrope,sans-serif;letter-spacing:.14em;color:#0B3B75;margin:0 0 12px">FOR MEDICAL INSTITUTIONS</p>
+<p style="font:600 clamp(16px,1.4vw,20px)/1.55 Pretendard,sans-serif;margin:0 0 12px">{{ c.mdLine }}</p>
+<p style="font:400 clamp(13px,1vw,14.5px)/1.75 Pretendard,sans-serif;color:#667085;margin:0 0 20px">{{ c.mdRole }}</p>
+<span onClick="{{ nav.mediat }}" role="button" tabindex="0" style="display:inline-flex;height:48px;padding:0 22px;align-items:center;border-radius:12px;background:#0B3B75;color:#fff;font:600 14px Pretendard,sans-serif;cursor:pointer" style-hover="background:#092e5c">{{ c.mdBtn }}</span>
+</div>
+</div>
+<div style="background:#fff;border-radius:24px;border:1px solid rgba(18,23,34,.1);overflow:hidden">
+<div style="height:clamp(120px,12vw,164px);background:linear-gradient(112deg,#6653D9,#8A79EA 58%,#FF725E);position:relative;display:flex;align-items:flex-end;padding:0 clamp(22px,2.4vw,32px) clamp(18px,2vw,24px)">
+<svg viewBox="0 0 560 164" width="100%" height="100%" aria-hidden="true" style="position:absolute;left:0;top:0"><path d="M90 58 L220 112 L360 48 L490 104" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.6" stroke-dasharray="5 5"/><circle cx="90" cy="58" r="5" fill="rgba(255,255,255,.75)"/><circle cx="220" cy="112" r="5" fill="rgba(255,255,255,.75)"/><circle cx="360" cy="48" r="5" fill="rgba(255,255,255,.75)"/><circle cx="490" cy="104" r="5" fill="rgba(255,255,255,.75)"/></svg>
+<div style="position:relative"><p style="font:700 clamp(22px,2vw,30px) Manrope,sans-serif;color:#fff;margin:0;letter-spacing:.02em">DIAT</p><p style="font:500 clamp(12px,1vw,14px) Pretendard,sans-serif;color:rgba(255,255,255,.88);margin:4px 0 0">{{ c.dtKo }}</p></div>
+</div>
+<div style="padding:clamp(22px,2.4vw,32px)">
+<p style="font:600 10px Manrope,sans-serif;letter-spacing:.14em;color:#667085;margin:0 0 12px">FOR F&amp;B · BEAUTY · TOURISM</p>
+<p style="font:600 clamp(16px,1.4vw,20px)/1.55 Pretendard,sans-serif;margin:0 0 12px">{{ c.dtLine }}</p>
+<p style="font:400 clamp(13px,1vw,14.5px)/1.75 Pretendard,sans-serif;color:#667085;margin:0 0 20px">{{ c.dtRole }}</p>
+<span onClick="{{ nav.diat }}" role="button" tabindex="0" style="display:inline-flex;height:48px;padding:0 22px;align-items:center;border-radius:12px;border:1px solid rgba(18,23,34,.16);color:#121722;font:600 14px Pretendard,sans-serif;cursor:pointer" style-hover="background:#F7F7F5">{{ c.dtBtn }}</span>
+</div>
+</div>
+</div>
+<div style="margin-top:clamp(20px,2.2vw,32px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px">
+<sc-for list="{{ c.clarify }}" as="q" hint-placeholder-count="3">
+<div style="background:#F1EFFC;border-radius:16px;padding:18px 20px;font:500 clamp(12.5px,1vw,14px)/1.7 Pretendard,sans-serif;color:#4A3FA8">{{ q }}</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section data-anchor="story" style="background:#fff;padding:clamp(56px,6.5vw,104px) 0;scroll-margin-top:76px">
+<div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px)">
+<p style="font:600 10.5px Manrope,sans-serif;letter-spacing:.16em;color:#6653D9;margin:0 0 16px">BUILT IN THE FIELD</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(28px,3.4vw,64px);align-items:start">
+<div>
+<h2 style="font:700 clamp(26px,2.8vw,42px)/1.34 Pretendard,sans-serif;letter-spacing:-.025em;margin:0 0 clamp(18px,2vw,26px);text-wrap:pretty">{{ c.storyT1 }}<br>{{ c.storyT2 }}</h2>
+<p style="font:400 clamp(14px,1.05vw,16px)/1.85 Pretendard,sans-serif;color:#667085;margin:0 0 clamp(20px,2.2vw,30px);text-wrap:pretty">{{ c.storyBody }}</p>
+<div style="border-radius:20px;overflow:hidden;aspect-ratio:16/9;border:1px solid rgba(18,23,34,.07);background:#EDEBE6">
+<img src="assets/story-consult.png" alt="병원 상담 현장" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:50% 38%;display:block">
+</div>
+</div>
+<div style="background:#F7F7F5;border-radius:24px;padding:clamp(24px,2.6vw,38px)">
+<sc-for list="{{ c.timeline }}" as="s" hint-placeholder-count="5">
+<div style="display:flex;gap:16px">
+<div style="width:34px;flex:none;display:flex;flex-direction:column;align-items:center">
+<div style="width:34px;height:34px;border-radius:50%;background:#fff;color:#6653D9;display:grid;place-items:center;font:800 12px Manrope,sans-serif;border:1px solid rgba(102,83,217,.2)">{{ s.n }}</div>
+<div style="width:1px;flex:1;background:rgba(18,23,34,.12)"></div>
+</div>
+<p style="font:600 clamp(14px,1.15vw,16.5px)/1.5 Pretendard,sans-serif;margin:6px 0 26px">{{ s.t }}</p>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+
+<section data-anchor="hospital" style="padding:clamp(56px,6.5vw,104px) 0;scroll-margin-top:76px">
+<div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px)">
+<p style="font:600 10.5px Manrope,sans-serif;letter-spacing:.16em;color:#6653D9;margin:0 0 16px">DIA HOSPITAL GROWTH</p>
+<h2 style="font:700 clamp(26px,2.8vw,42px)/1.34 Pretendard,sans-serif;letter-spacing:-.025em;margin:0 0 16px;max-width:900px;text-wrap:pretty">{{ c.hospTitle }}</h2>
+<p style="font:400 clamp(14px,1.05vw,16px)/1.85 Pretendard,sans-serif;color:#667085;margin:0 0 clamp(28px,3vw,44px);max-width:760px;text-wrap:pretty">{{ c.hospDesc }}</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:clamp(12px,1.4vw,18px)">
+<sc-for list="{{ c.hospCards }}" as="h" hint-placeholder-count="4">
+<div style="background:#fff;border-radius:20px;border:1px solid rgba(18,23,34,.08);padding:clamp(20px,2.2vw,30px)" style-hover="border-color:rgba(102,83,217,.35)">
+<p style="font:800 12px Manrope,sans-serif;color:#6653D9;margin:0 0 14px">{{ h.n }}</p>
+<p style="font:700 clamp(15px,1.25vw,18px)/1.45 Pretendard,sans-serif;margin:0 0 10px">{{ h.t }}</p>
+<p style="font:400 clamp(12.5px,1vw,14px)/1.75 Pretendard,sans-serif;color:#667085;margin:0">{{ h.d }}</p>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:clamp(18px,2vw,28px);border-radius:20px;padding:clamp(22px,2.4vw,34px);background:linear-gradient(120deg,#F1EFFC,#EAF3FF);border:1px solid rgba(102,83,217,.14);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;align-items:center">
+<p style="font:600 clamp(15px,1.3vw,19px)/1.6 Pretendard,sans-serif;margin:0;text-wrap:pretty">{{ c.hospEmph }}</p>
+<p style="font:400 clamp(11.5px,.9vw,13px)/1.75 Pretendard,sans-serif;color:#667085;margin:0">{{ c.hospNote }}</p>
+</div>
+</div>
+</section>
+
+<section data-anchor="mediat" style="background:#fff;padding:clamp(56px,6.5vw,104px) 0 0;scroll-margin-top:76px">
+<div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px)">
+<div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:clamp(18px,2vw,26px)">
+<div style="width:clamp(150px,14vw,196px);border-radius:14px;background:#F7F7F5;border:1px solid rgba(18,23,34,.07);padding:8px 12px">
+<img src="assets/mediat-logo.png" alt="MEDIAT" width="1774" height="887" style="width:100%;height:auto;display:block">
+</div>
+<p style="font:600 10.5px Manrope,sans-serif;letter-spacing:.14em;color:#0B3B75;margin:0">MEDIAT | GREATER CHINA MEDICAL GROWTH</p>
+</div>
+<h2 style="font:700 clamp(26px,2.8vw,42px)/1.34 Pretendard,sans-serif;letter-spacing:-.025em;margin:0 0 14px;max-width:900px;text-wrap:pretty">{{ c.mdHeroT }}</h2>
+<p style="font:400 clamp(14px,1.05vw,16px)/1.85 Pretendard,sans-serif;color:#667085;margin:0 0 clamp(36px,4vw,64px);max-width:760px;text-wrap:pretty">{{ c.mdHeroD }}</p>
+
+<p style="font:800 12px Manrope,sans-serif;color:#1577FF;margin:0 0 14px">01 PROBLEM</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,3vw,56px);align-items:start;margin-bottom:clamp(20px,2.4vw,32px)">
+<h3 style="font:700 clamp(22px,2.2vw,34px)/1.4 Pretendard,sans-serif;letter-spacing:-.02em;margin:0;text-wrap:pretty">{{ c.md1T1 }}<br>{{ c.md1T2 }}</h3>
+<p style="font:400 clamp(13.5px,1vw,15.5px)/1.85 Pretendard,sans-serif;color:#667085;margin:0;text-wrap:pretty">{{ c.md1Body }}</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px;margin-bottom:clamp(48px,5vw,88px)">
+<sc-for list="{{ c.md1Cards }}" as="p" hint-placeholder-count="4">
+<div style="background:#F7F7F5;border-radius:18px;padding:clamp(18px,2vw,26px);border:1px solid rgba(18,23,34,.06)">
+<span style="color:#FF725E;font:700 15px Manrope,sans-serif;display:block;margin-bottom:12px">✕</span>
+<p style="font:500 clamp(13px,1vw,14.5px)/1.7 Pretendard,sans-serif;color:#344054;margin:0">{{ p }}</p>
+</div>
+</sc-for>
+</div>
+
+<p style="font:800 12px Manrope,sans-serif;color:#1577FF;margin:0 0 14px">02 CHINA APPEAL</p>
+<h3 style="font:700 clamp(22px,2.2vw,34px)/1.4 Pretendard,sans-serif;letter-spacing:-.02em;margin:0 0 clamp(24px,2.6vw,40px);max-width:880px;text-wrap:pretty">{{ c.md2T }}</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:clamp(12px,1.4vw,18px);margin-bottom:clamp(18px,2vw,26px)">
+<sc-for list="{{ c.md2Cards }}" as="s" hint-placeholder-count="4">
+<div style="border-radius:20px;border:1px solid rgba(11,59,117,.14);padding:clamp(20px,2.2vw,30px);background:linear-gradient(170deg,#fff,#F6FAFF)">
+<p style="font:700 clamp(15px,1.25vw,18px) Pretendard,sans-serif;color:#0B3B75;margin:0 0 10px">{{ s.t }}</p>
+<p style="font:400 clamp(12.5px,1vw,14px)/1.75 Pretendard,sans-serif;color:#667085;margin:0">{{ s.d }}</p>
+</div>
+</sc-for>
+</div>
+<div style="border-radius:20px;padding:clamp(22px,2.4vw,34px);background:linear-gradient(120deg,#EAF3FF,#E7F8FA);border:1px solid rgba(21,119,255,.16);margin-bottom:clamp(48px,5vw,88px)">
+<p style="font:600 clamp(16px,1.5vw,22px)/1.6 Pretendard,sans-serif;color:#0B3B75;margin:0;text-wrap:pretty">{{ c.md2Emph }}</p>
+</div>
+</div>
+
+<div style="background:#081426;padding:clamp(48px,5.5vw,88px) 0;position:relative;overflow:hidden">
+<div style="position:absolute;left:-6%;bottom:-30%;width:min(620px,55vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(102,83,217,.32),transparent 66%)"></div>
+<div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px);position:relative">
+<p style="font:800 12px Manrope,sans-serif;color:#10C5D6;margin:0 0 14px">03 FIELD BOTTLENECK</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,3vw,56px);align-items:start;margin-bottom:clamp(24px,2.8vw,40px)">
+<h3 style="font:700 clamp(22px,2.2vw,34px)/1.4 Pretendard,sans-serif;letter-spacing:-.02em;color:#fff;margin:0;text-wrap:pretty">{{ c.md3T }}</h3>
+<p style="font:400 clamp(13.5px,1vw,15.5px)/1.85 Pretendard,sans-serif;color:rgba(255,255,255,.62);margin:0;text-wrap:pretty">{{ c.md3Body }}</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin-bottom:0">
+<sc-for list="{{ c.md3Cards }}" as="b" hint-placeholder-count="6">
+<div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:clamp(16px,1.8vw,24px);font:500 clamp(12.5px,1vw,14.5px)/1.6 Pretendard,sans-serif;color:rgba(255,255,255,.86)">{{ b }}</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<div style="max-width:1200px;margin:0 auto;padding:clamp(48px,5.5vw,88px) clamp(20px,4vw,40px) clamp(56px,6.5vw,104px)">
+<p style="font:800 12px Manrope,sans-serif;color:#1577FF;margin:0 0 14px">04 SOLUTION</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,3vw,56px);align-items:start;margin-bottom:clamp(24px,2.8vw,40px)">
+<h3 style="font:700 clamp(22px,2.2vw,34px)/1.4 Pretendard,sans-serif;letter-spacing:-.02em;margin:0;text-wrap:pretty">{{ c.md4T }}</h3>
+<p style="font:400 clamp(13.5px,1vw,15.5px)/1.85 Pretendard,sans-serif;color:#667085;margin:0;text-wrap:pretty">{{ c.md4Body }}</p>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px;margin-bottom:18px">
+<sc-for list="{{ c.md4Cards }}" as="f" hint-placeholder-count="6">
+<div style="background:linear-gradient(150deg,#0B3B75,#124b90);border-radius:18px;padding:clamp(18px,2vw,26px);font:500 clamp(12.5px,1vw,14.5px)/1.65 Pretendard,sans-serif;color:rgba(255,255,255,.9)">{{ f }}</div>
+</sc-for>
+</div>
+<div style="border-radius:16px;background:#F1EFFC;padding:clamp(16px,1.8vw,22px) clamp(18px,2vw,26px)">
+<p style="font:500 clamp(12px,.95vw,14px)/1.8 Pretendard,sans-serif;color:#4A3FA8;margin:0">{{ c.md4Note }}</p>
+</div>
+</div>
+</section>
+
+<section data-anchor="journey" style="padding:clamp(56px,6.5vw,104px) 0;scroll-margin-top:76px">
+<div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px)">
+<p style="font:600 10.5px Manrope,sans-serif;letter-spacing:.16em;color:#1577FF;margin:0 0 16px">MEDIAT PATIENT JOURNEY</p>
+<h2 style="font:700 clamp(24px,2.6vw,38px)/1.36 Pretendard,sans-serif;letter-spacing:-.025em;margin:0 0 clamp(30px,3.4vw,52px);max-width:900px;text-wrap:pretty">{{ c.jT }}</h2>
+<sc-if value="{{ journeyH }}" hint-placeholder-val="{{ true }}">
+<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:10px;align-items:start">
+<sc-for list="{{ journeySteps }}" as="j" hint-placeholder-count="7">
+<div>
+<div style="height:5px;border-radius:3px;background:{{ j.bg }};margin-bottom:16px"></div>
+<p style="font:800 11px Manrope,sans-serif;color:#98A2B3;margin:0 0 6px">{{ j.n }}</p>
+<p style="font:700 15px Manrope,sans-serif;margin:0 0 8px;letter-spacing:.02em">{{ j.en }}</p>
+<p style="font:400 12.5px/1.65 Pretendard,sans-serif;color:#667085;margin:0">{{ j.ko }}</p>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ journeyV }}" hint-placeholder-val="{{ false }}">
+<div style="background:#fff;border-radius:24px;border:1px solid rgba(18,23,34,.08);padding:clamp(22px,2.6vw,34px)">
+<sc-for list="{{ journeySteps }}" as="j" hint-placeholder-count="7">
+<div style="display:flex;gap:16px">
+<div style="width:34px;flex:none;display:flex;flex-direction:column;align-items:center">
+<div style="width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font:800 11px Manrope,sans-serif;color:#fff;background:{{ j.bg }}">{{ j.n }}</div>
+<div style="width:1px;flex:1;background:rgba(18,23,34,.1)"></div>
+</div>
+<div style="flex:1;padding-bottom:24px">
+<p style="font:700 15px Manrope,sans-serif;margin:6px 0 5px;letter-spacing:.02em">{{ j.en }}</p>
+<p style="font:400 13.5px/1.6 Pretendard,sans-serif;color:#667085;margin:0">{{ j.ko }}</p>
+</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<div style="margin-top:clamp(20px,2.4vw,32px);border-radius:20px;padding:clamp(22px,2.4vw,34px);background:linear-gradient(120deg,#EAF3FF,#E7F8FA);border:1px solid rgba(21,119,255,.16)">
+<p style="font:600 clamp(16px,1.5vw,22px)/1.6 Pretendard,sans-serif;color:#0B3B75;margin:0;text-wrap:pretty">{{ c.jEmph }}</p>
+</div>
+</div>
+</section>
+
+<section data-anchor="diat" style="background:#fff;padding:clamp(56px,6.5vw,104px) 0;scroll-margin-top:76px">
+<div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px)">
+<div style="border-radius:28px;background:linear-gradient(140deg,#6653D9,#8A79EA 56%,#FF725E);padding:clamp(28px,3.4vw,56px);margin-bottom:clamp(28px,3vw,48px)">
+<p style="font:800 clamp(28px,3vw,44px) Manrope,sans-serif;color:#fff;margin:0 0 6px;letter-spacing:.02em">DIAT</p>
+<p style="font:600 10.5px Manrope,sans-serif;letter-spacing:.16em;color:rgba(255,255,255,.82);margin:0 0 clamp(20px,2.2vw,30px)">DIAT | GREATER CHINA VISITOR GROWTH</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(20px,2.4vw,44px);align-items:end">
+<h2 style="font:700 clamp(24px,2.6vw,38px)/1.36 Pretendard,sans-serif;letter-spacing:-.025em;color:#fff;margin:0;text-wrap:pretty">{{ c.dtHeroT1 }}<br>{{ c.dtHeroT2 }}</h2>
+<p style="font:400 clamp(13.5px,1vw,15.5px)/1.85 Pretendard,sans-serif;color:rgba(255,255,255,.84);margin:0;text-wrap:pretty">{{ c.dtHeroD }}</p>
+</div>
+</div>
+<p style="font:600 10.5px Manrope,sans-serif;letter-spacing:.16em;color:#667085;margin:0 0 clamp(18px,2vw,26px)">FOR F&amp;B · CAFE · BEAUTY · WELLNESS · TOURISM · RETAIL</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:clamp(12px,1.4vw,18px);margin-bottom:clamp(18px,2vw,28px)">
+<sc-for list="{{ c.dtCards }}" as="s" hint-placeholder-count="4">
+<div style="background:#F7F7F5;border-radius:20px;padding:clamp(20px,2.2vw,30px);border:1px solid rgba(18,23,34,.06)">
+<span style="width:9px;height:9px;border-radius:50%;background:#6653D9;display:block;margin-bottom:14px"></span>
+<p style="font:700 clamp(15px,1.25vw,18px)/1.45 Pretendard,sans-serif;margin:0 0 10px">{{ s.t }}</p>
+<p style="font:400 clamp(12.5px,1vw,14px)/1.75 Pretendard,sans-serif;color:#667085;margin:0">{{ s.d }}</p>
+</div>
+</sc-for>
+</div>
+<div style="border-radius:20px;padding:clamp(22px,2.4vw,34px);background:linear-gradient(120deg,#F1EFFC,#FFEFEC);border:1px solid rgba(255,114,94,.2);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:20px;align-items:center">
+<p style="font:600 clamp(15px,1.4vw,20px)/1.6 Pretendard,sans-serif;margin:0;text-wrap:pretty">{{ c.dtEmph }}</p>
+<span onClick="{{ nav.contact }}" role="button" tabindex="0" style="justify-self:start;height:52px;padding:0 24px;border-radius:14px;background:#6653D9;color:#fff;display:grid;place-items:center;font:700 14.5px Pretendard,sans-serif;cursor:pointer" style-hover="background:#5744c4">{{ c.dtCta }}</span>
+</div>
+</div>
+</section>
+
+<section data-anchor="why" style="padding:clamp(56px,6.5vw,104px) 0;scroll-margin-top:76px">
+<div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px)">
+<p style="font:600 10.5px Manrope,sans-serif;letter-spacing:.16em;color:#6653D9;margin:0 0 16px">WHY DIA IS DIFFERENT</p>
+<h2 style="font:700 clamp(24px,2.6vw,38px)/1.36 Pretendard,sans-serif;letter-spacing:-.025em;margin:0 0 clamp(26px,3vw,44px);max-width:900px;text-wrap:pretty">{{ c.cmpT }}</h2>
+<sc-if value="{{ tableWide }}" hint-placeholder-val="{{ true }}">
+<div style="background:#fff;border-radius:24px;border:1px solid rgba(18,23,34,.08);overflow:hidden">
+<div style="display:grid;grid-template-columns:180px 1fr 1fr;background:#F7F7F5;border-bottom:1px solid rgba(18,23,34,.08)">
+<div style="padding:18px 24px;font:600 12.5px Pretendard,sans-serif;color:#98A2B3">{{ c.cmpH0 }}</div>
+<div style="padding:18px 24px;font:600 12.5px Pretendard,sans-serif;color:#98A2B3">{{ c.cmpH1 }}</div>
+<div style="padding:18px 24px;font:700 12.5px Manrope,sans-serif;color:#6653D9;letter-spacing:.04em">DIA</div>
+</div>
+<sc-for list="{{ c.cmpRows }}" as="r" hint-placeholder-count="6">
+<div style="display:grid;grid-template-columns:180px 1fr 1fr;border-bottom:1px solid rgba(18,23,34,.06)">
+<div style="padding:20px 24px;font:600 14px Pretendard,sans-serif">{{ r.k }}</div>
+<div style="padding:20px 24px;font:400 14px/1.6 Pretendard,sans-serif;color:#98A2B3">{{ r.a }}</div>
+<div style="padding:20px 24px;font:500 14px/1.6 Pretendard,sans-serif;color:#4A3FA8;background:rgba(102,83,217,.045)">{{ r.b }}</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{ tableNarrow }}" hint-placeholder-val="{{ false }}">
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ c.cmpRows }}" as="r" hint-placeholder-count="6">
+<div style="background:#fff;border-radius:16px;border:1px solid rgba(18,23,34,.08);padding:18px 20px">
+<p style="font:700 14px Pretendard,sans-serif;margin:0 0 12px">{{ r.k }}</p>
+<p style="font:400 13px/1.6 Pretendard,sans-serif;color:#98A2B3;margin:0 0 8px">{{ r.a }}</p>
+<p style="font:500 13px/1.6 Pretendard,sans-serif;color:#4A3FA8;margin:0;padding-top:8px;border-top:1px solid rgba(18,23,34,.06)"><span style="font-family:Manrope,sans-serif;font-weight:700;letter-spacing:.04em">DIA </span>{{ r.b }}</p>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<p style="font:500 clamp(13px,1.05vw,15.5px)/1.8 Pretendard,sans-serif;color:#667085;margin:clamp(18px,2vw,26px) 0 0;max-width:760px">{{ c.cmpNote }}</p>
+</div>
+</section>
+
+<section data-anchor="process" style="background:#fff;padding:clamp(56px,6.5vw,104px) 0;scroll-margin-top:76px">
+<div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px)">
+<p style="font:600 10.5px Manrope,sans-serif;letter-spacing:.16em;color:#6653D9;margin:0 0 16px">PROCESS</p>
+<h2 style="font:700 clamp(24px,2.6vw,38px)/1.36 Pretendard,sans-serif;letter-spacing:-.025em;margin:0 0 clamp(26px,3vw,44px);max-width:900px;text-wrap:pretty">{{ c.procT }}</h2>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ procSteps }}" as="p" hint-placeholder-count="5">
+<div onClick="{{ p.on }}" role="button" tabindex="0" aria-expanded="{{ p.open }}" style="background:#F7F7F5;border-radius:18px;border:1px solid rgba(18,23,34,.06);padding:clamp(18px,2vw,26px) clamp(20px,2.2vw,30px);cursor:pointer" style-hover="border-color:rgba(102,83,217,.3)">
+<div style="display:flex;align-items:center;gap:clamp(12px,1.4vw,20px)">
+<span style="width:32px;height:32px;flex:none;border-radius:10px;background:#fff;color:#6653D9;display:grid;place-items:center;font:800 11px Manrope,sans-serif;border:1px solid rgba(102,83,217,.18)">{{ p.n }}</span>
+<p style="font:700 clamp(15px,1.35vw,19px) Pretendard,sans-serif;margin:0;flex:1">{{ p.t }}</p>
+<span style="font:400 20px Manrope,sans-serif;color:#98A2B3">{{ p.icon }}</span>
+</div>
+<sc-if value="{{ p.open }}" hint-placeholder-val="{{ false }}">
+<p style="font:400 clamp(13px,1.05vw,15px)/1.8 Pretendard,sans-serif;color:#667085;margin:14px 0 0;padding-left:clamp(44px,3.4vw,52px);max-width:720px">{{ p.d }}</p>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section data-anchor="contact" style="background:#081426;padding:clamp(56px,6.5vw,104px) 0;position:relative;overflow:hidden;scroll-margin-top:76px">
+<div style="position:absolute;right:-8%;top:-20%;width:min(680px,55vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(102,83,217,.4),transparent 66%)"></div>
+<div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px);position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(32px,4vw,72px);align-items:start">
+<div>
+<h2 style="font:700 clamp(26px,2.8vw,42px)/1.34 Pretendard,sans-serif;letter-spacing:-.025em;color:#fff;margin:0 0 18px;text-wrap:pretty">{{ c.finalT1 }}<br>{{ c.finalT2 }}</h2>
+<p style="font:400 clamp(13.5px,1.05vw,16px)/1.85 Pretendard,sans-serif;color:rgba(255,255,255,.62);margin:0 0 clamp(24px,2.6vw,36px);text-wrap:pretty">{{ c.finalDesc }}</p>
+<div style="display:flex;flex-direction:column;gap:10px">
+<sc-for list="{{ c.caps }}" as="cap" hint-placeholder-count="5">
+<div style="display:flex;align-items:center;gap:10px;font:500 clamp(12.5px,1vw,14.5px) Pretendard,sans-serif;color:rgba(255,255,255,.72)"><span style="width:6px;height:6px;border-radius:50%;background:#10C5D6;flex:none"></span>{{ cap }}</div>
+</sc-for>
+</div>
+</div>
+<div style="background:#fff;border-radius:24px;padding:clamp(24px,2.6vw,40px)">
+<div style="display:flex;flex-direction:column;gap:16px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px">
+<div><p style="font:600 12.5px Pretendard,sans-serif;color:#344054;margin:0 0 7px">{{ c.fOrg }}</p><input value="{{ f.org }}" onChange="{{ f.setOrg }}" placeholder="{{ c.fOrgP }}" style="width:100%;height:48px;border-radius:12px;border:1px solid rgba(18,23,34,.14);padding:0 14px;font-size:14.5px;color:#121722"></div>
+<div><p style="font:600 12.5px Pretendard,sans-serif;color:#344054;margin:0 0 7px">{{ c.fName }}</p><input value="{{ f.name }}" onChange="{{ f.setName }}" style="width:100%;height:48px;border-radius:12px;border:1px solid rgba(18,23,34,.14);padding:0 14px;font-size:14.5px;color:#121722"></div>
+<div><p style="font:600 12.5px Pretendard,sans-serif;color:#344054;margin:0 0 7px">{{ c.fRole }}</p><input value="{{ f.role }}" onChange="{{ f.setRole }}" placeholder="{{ c.fRoleP }}" style="width:100%;height:48px;border-radius:12px;border:1px solid rgba(18,23,34,.14);padding:0 14px;font-size:14.5px;color:#121722"></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px">
+<div><p style="font:600 12.5px Pretendard,sans-serif;color:#344054;margin:0 0 7px">{{ c.fTel }}</p><input value="{{ f.tel }}" onChange="{{ f.setTel }}" inputMode="tel" style="width:100%;height:48px;border-radius:12px;border:1px solid rgba(18,23,34,.14);padding:0 14px;font-size:14.5px;color:#121722"></div>
+<div><p style="font:600 12.5px Pretendard,sans-serif;color:#344054;margin:0 0 7px">{{ c.fMail }}</p><input value="{{ f.mail }}" onChange="{{ f.setMail }}" inputMode="email" placeholder="name@hospital.co.kr" style="width:100%;height:48px;border-radius:12px;border:1px solid rgba(18,23,34,.14);padding:0 14px;font-size:14.5px;color:#121722"></div>
+</div>
+<div>
+<p style="font:600 12.5px Pretendard,sans-serif;color:#344054;margin:0 0 9px">{{ c.fInterest }}</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ interests }}" as="i" hint-placeholder-count="4">
+<span onClick="{{ i.on }}" role="button" tabindex="0" style="{{ i.style }}">{{ i.label }}</span>
+</sc-for>
+</div>
+</div>
+<div><p style="font:600 12.5px Pretendard,sans-serif;color:#344054;margin:0 0 7px">{{ c.fWorry }}</p><textarea value="{{ f.worry }}" onChange="{{ f.setWorry }}" rows="3" placeholder="{{ c.fWorryP }}" style="width:100%;border-radius:12px;border:1px solid rgba(18,23,34,.14);padding:12px 14px;font-size:14.5px;color:#121722;resize:vertical;line-height:1.6"></textarea></div>
+<div>
+<p style="font:600 12.5px Pretendard,sans-serif;color:#344054;margin:0 0 9px">{{ c.fBudget }}</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<sc-for list="{{ budgets }}" as="b" hint-placeholder-count="4">
+<span onClick="{{ b.on }}" role="button" tabindex="0" style="{{ b.style }}">{{ b.label }}</span>
+</sc-for>
+</div>
+<p style="font:400 11px Pretendard,sans-serif;color:#98A2B3;margin:9px 0 0">{{ c.fBudgetNote }}</p>
+</div>
+<div onClick="{{ toggleAgree }}" role="checkbox" tabindex="0" aria-checked="{{ agree }}" style="display:flex;gap:11px;align-items:flex-start;cursor:pointer">
+<span style="{{ agreeBox }}">✓</span>
+<p style="font:400 12.5px/1.65 Pretendard,sans-serif;color:#667085;margin:0;flex:1">{{ c.fAgree }}</p>
+</div>
+<div onClick="{{ submit }}" role="button" tabindex="0" style="{{ submitStyle }}">{{ c.fSubmit }}</div>
+<sc-if value="{{ showSent }}" hint-placeholder-val="{{ false }}">
+<div style="border-radius:14px;background:#F1EFFC;border:1px solid rgba(102,83,217,.2);padding:16px 18px">
+<p style="font:600 13px/1.7 Pretendard,sans-serif;color:#4A3FA8;margin:0 0 8px">{{ c.fPending }}</p>
+<p style="font:500 11px ui-monospace,Menlo,monospace;color:#6653D9;margin:0 0 14px">TODO_CONTACT_ENDPOINT</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<span style="height:44px;padding:0 18px;border-radius:11px;background:#121722;color:#fff;display:grid;place-items:center;font:600 13px Pretendard,sans-serif">{{ c.fKakao }}</span>
+<span style="height:44px;padding:0 18px;border-radius:11px;border:1px solid rgba(18,23,34,.16);color:#121722;display:grid;place-items:center;font:600 13px Pretendard,sans-serif">{{ c.fMailBtn }}</span>
+</div>
+</div>
+</sc-if>
+</div>
+</div>
+</div>
+</section>
+
+<footer style="background:#050d18;padding:clamp(40px,4.5vw,64px) 0 clamp(28px,3vw,40px)">
+<div style="max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px)">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(24px,3vw,48px);padding-bottom:clamp(28px,3vw,44px);border-bottom:1px solid rgba(255,255,255,.1)">
+<div>
+<img src="assets/dia-logo.png" alt="DIA" style="height:24px;width:auto;display:block;margin-bottom:16px;filter:brightness(0) invert(1)">
+<p style="font:500 clamp(13px,1.05vw,15px)/1.7 Pretendard,sans-serif;color:rgba(255,255,255,.72);margin:0">{{ c.footLine }}</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<sc-for list="{{ footLinks }}" as="l" hint-placeholder-count="5">
+<span onClick="{{ l.on }}" role="link" tabindex="0" style="font:500 13.5px Pretendard,sans-serif;color:rgba(255,255,255,.55);cursor:pointer" style-hover="color:#fff">{{ l.label }}</span>
+</sc-for>
+</div>
+<div>
+<p style="font:400 12.5px/2 Pretendard,sans-serif;color:rgba(255,255,255,.42);margin:0">회사명 [정보 입력]<br>대표자 [정보 입력]<br>사업자등록번호 [정보 입력]<br>주소 [정보 입력]<br>이메일 [정보 입력] · 전화 [정보 입력]</p>
+</div>
+</div>
+<p style="font:400 12px Manrope,sans-serif;color:rgba(255,255,255,.32);margin:20px 0 0">© DIA. All rights reserved.</p>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#6653D9&quot;,&quot;options&quot;:[&quot;#6653D9&quot;,&quot;#1577FF&quot;,&quot;#0B3B75&quot;,&quot;#121722&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;브랜드&quot;},&quot;defaultLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;한국어&quot;,&quot;中文&quot;],&quot;default&quot;:&quot;한국어&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;브랜드&quot;}}">
+const KO = {
+  navTitle: '', 
+  h1a: '현장에서 검증한 성장 전략으로,', h1b: '한국의 병원과 브랜드를', h1c: '중화권 고객에게 연결합니다.',
+  heroDesc: 'DIA는 한의원에서 한방병원으로 성장한 실무 경험을 기반으로, 국내 병원 마케팅부터 중화권 해외환자·방한 고객 유치까지 설계하고 실행합니다.',
+  cta1: '우리 브랜드 성장 구조 진단받기', cta2: 'MEDIAT · DIAT 살펴보기',
+  diagTitle: '3분 성장 구조 진단', diagSub: '현재 병목 지점부터 함께 확인합니다',
+  mdKo: '중화권 해외환자 유치', mdLine: '조회수를 환자로,\n문의를 실제 내원으로 연결합니다.',
+  mdTags: ['샤오홍슈 퍼스널 브랜딩', '다국어 상담 운영', '예약·내원 여정 설계'], mdBtn: 'MEDIAT 자세히 보기',
+  dtKo: '중화권 방한 고객 유치', dtLine: '중국 고객이 한국에서 찾고,\n저장하고, 직접 방문하게 만듭니다.',
+  dtTags: ['중화권 브랜드 포지셔닝', '숏폼·UGC 캠페인', '방한 동선 기반 유입'], dtBtn: 'DIAT 자세히 보기',
+  oneCoTitle: '한국에서 쌓은 현장 전문성을, 중화권 시장의 성장 기회로 확장합니다.', aboutBtn: 'DIA는 어떤 회사인가',
+  hospTitle: '광고 집행보다 먼저, 환자가 선택하는 구조를 설계합니다.',
+  hospSub: '진료 현장과 의료광고 기준을 이해하는 담당자가 병원의 강점을 정리합니다.',
+  hospShort: [{n:'01',t:'의료광고 심의 지원'},{n:'02',t:'네이버 플레이스 세팅'},{n:'03',t:'네이버 검색광고'},{n:'04',t:'네이버 GFA'}],
+  hospBtn: '국내 병원 마케팅 서비스 보기',
+  hospDesc: '진료 현장과 의료광고 기준을 이해하는 담당자가 병원의 강점을 정리하고, 검색부터 내원까지 필요한 채널을 목적에 맞게 연결합니다.',
+  hospCards: [
+    {n:'01',t:'의료광고 심의 지원',d:'매체·소재별 심의 필요 여부를 검토하고, 표현 리스크를 줄인 문안과 집행 절차를 설계합니다.'},
+    {n:'02',t:'네이버 플레이스 세팅',d:'진료 정보, 대표 키워드, 이미지, 소식, 예약 동선을 정비해 검색 후 이탈을 줄입니다.'},
+    {n:'03',t:'네이버 검색광고',d:'파워링크 중심의 키워드 구조, 소재 A/B 테스트, 랜딩 연결과 전환 측정을 운영합니다.'},
+    {n:'04',t:'네이버 GFA',d:'병원의 진료과목과 타깃 환자에 맞는 네이티브·배너 소재를 기획하고 인지도와 전환 캠페인을 분리합니다.'}],
+  hospEmph: '노출을 만드는 데서 멈추지 않고, 문의와 내원으로 이어지는 지점을 매주 점검합니다.',
+  hospNote: '의료법과 매체 정책에 따라 결과를 보장하는 표현은 사용하지 않습니다. 심의 대행이 아닌 심의 지원, 매출 보장이 아닌 전환 구조 개선으로 진행합니다.',
+  partnerTitle: '현장을 함께 이해하고, 성장을 함께 만들어갑니다.', partnerBtn: '파트너와 사례 전체 보기',
+  storyT1: '한의원에서 한방병원으로.', storyT2: 'DIA는 현장에서 시작되었습니다.',
+  storyTeaser: '단순한 노출이나 조회수만으로는 병원이 성장하지 않는다는 것을 현장에서 먼저 확인했습니다.',
+  storyBtn: '창업 스토리 읽기',
+  storyBody: '직접 병원의 마케팅과 경영을 함께 운영하며 알게 되었습니다. 단순한 노출이나 조회수만으로는 병원이 성장하지 않는다는 것, 광고와 상담, 현장 운영이 하나의 흐름으로 이어져야 실제 매출과 재방문이 만들어진다는 것을요. DIA는 그 경험을 한 병원에 머무르게 하지 않고, 더 많은 병원과 한국 브랜드의 성장 시스템으로 확장하기 위해 시작되었습니다.',
+  timeline: [{n:'01',t:'한의원 운영 현장에서 시작'},{n:'02',t:'한방병원 성장 과정의 마케팅·경영 실무 수행'},{n:'03',t:'국내 병원 마케팅 전문성 축적'},{n:'04',t:'중화권 콘텐츠와 해외환자 유치로 확장'},{n:'05',t:'MEDIAT·DIAT 통합 성장 구조 구축'}],
+  finalT1: '지금 필요한 것은 광고 상품이 아니라,', finalT2: '고객이 실제로 움직이는 성장 구조입니다.',
+  finalDesc: '국내 병원 마케팅, 중화권 해외환자 유치, 방한 고객 유치 중 현재 가장 필요한 과제부터 함께 진단하겠습니다.',
+  finalBtn: '성장 상담 요청하기', footLine: '현장에서 시작해, 국경을 넘어 성장시킵니다.',
+  aboutTitle: '한국에서 쌓은 현장 전문성을, 중화권 시장의 성장 기회로 확장합니다.',
+  aboutBody: 'DIA는 광고 매체만 운영하는 회사가 아닙니다. 환자가 병원을 찾고 상담하고 방문하는 실제 과정과, 브랜드가 고객에게 발견되고 선택되는 과정을 함께 설계합니다. 국내 병원 성장 경험을 기반으로 의료기관에는 MEDIAT, F&B·뷰티·관광 브랜드에는 DIAT라는 맞춤형 중화권 고객 유치 솔루션을 제공합니다.',
+  diaRole: '병원 현장 경험을 기반으로 국내 성장과 중화권 확장을 연결하는 Growth Operating Company',
+  mdRole: '의료기관 대상. 중화권 잠재환자의 발견부터 상담, 예약, 내원, 사후관리까지 연결합니다.',
+  dtRole: 'F&B·카페·뷰티·웰니스·관광·리테일 브랜드 대상. 방한 고객을 매장 방문과 구매로 연결합니다.',
+  clarify: ['DIA는 회사이자 모브랜드입니다.','MEDIAT와 DIAT는 DIA가 운영하는 두 개의 전문 서비스입니다.','국내 병원 마케팅은 DIA가 현장에서 축적한 기반 역량이며, MEDIAT의 신뢰 근거이기도 합니다.'],
+  caps: ['병원 운영 이해','의료광고 실무','네이버 매체 운영','중화권 콘텐츠 현지화','해외고객 상담·예약 여정 설계'],
+  mdHeroT: '조회수를 환자로, 문의를 실제 내원으로 연결합니다.',
+  mdHeroD: '중화권 해외환자 유치를 콘텐츠 제작에서 끝내지 않고, 상담·예약·내원·사후관리까지 하나의 여정으로 운영합니다.',
+  md1T1: '샤오홍슈 조회수는 늘었는데,', md1T2: '왜 실제 예약은 늘지 않을까요?',
+  md1Body: '번역된 게시물과 단발성 체험단만으로는 신뢰가 쌓이지 않습니다. 병원과 의료진의 전문성이 중국 고객의 언어와 관심사로 전달되고, 콘텐츠에서 상담으로 넘어가는 동선이 설계되어야 합니다.',
+  md1Cards: ['한국식 콘텐츠를 단순 번역해 중국 고객의 검색 의도와 맞지 않음','계정의 인지도는 쌓이지만 병원·의료진의 신뢰 자산이 남지 않음','조회수와 저장 수만 보고 실제 문의·예약 전환은 추적하지 못함','인플루언서 협찬이 끝나면 유입도 함께 멈춤'],
+  md2T: '중국 고객은 광고보다, 믿을 수 있는 사람과 실제 경험을 먼저 확인합니다.',
+  md2Cards: [
+    {t:'샤오홍슈 퍼스널 브랜딩',d:'의료진 또는 브랜드 대표의 관점과 전문성을 지속 가능한 계정 자산으로 구축합니다.'},
+    {t:'중국어 숏폼 제작',d:'중국 사용자의 후킹 방식, 검색 키워드, 자막 문법에 맞춘 기획·촬영·편집을 진행합니다.'},
+    {t:'콘텐츠 현지화',d:'한국에서 통했던 메시지를 번역하는 것이 아니라 중국 고객의 질문과 불안을 기준으로 재설계합니다.'},
+    {t:'문의 전환 동선',d:'게시물, 프로필, DM, 위챗·상담 채널을 연결해 다음 행동을 명확하게 제시합니다.'}],
+  md2Emph: '노출되는 콘텐츠가 아니라, 문의할 이유를 만드는 콘텐츠를 설계합니다.',
+  md3T: '환자가 문의한 다음부터, 병원의 진짜 운영 문제가 시작됩니다.',
+  md3Body: '샤오홍슈·위챗·DM·카카오톡 등 채널은 흩어지고, 번역과 응대가 늦어지며, 상담 이후 예약과 재방문 기록은 담당자의 개인 메신저에 남습니다. 인하우스 해외환자 전담팀을 꾸려도 채널·인력·정산을 함께 관리하기 어렵습니다.',
+  md3Cards: ['문의 채널 분산','반복되는 수동 번역','진료 중 또는 야간의 응답 지연','상담 내용과 예약 정보의 누락','시술 전후 안내와 재방문 알림의 단절','실제 내원·결제 성과를 콘텐츠와 연결하기 어려움'],
+  md3Note: '좌측은 현장 문제를 확인하기 위한 참고 화면 자리입니다. 실제 서비스 UI가 아니며, 최종 화면은 DIA 자체 UI로 제작합니다.',
+  md4T: '유입부터 사후관리까지, 하나의 해외환자 여정으로 연결합니다.',
+  md4Body: 'MEDIAT는 중국어 콘텐츠 제작과 고객 유입에 그치지 않고, 다국어 상담·예약·내원·사후관리 데이터를 하나의 운영 흐름으로 연결합니다.',
+  md4Cards: ['다채널 문의 수집 및 고객 정보 정리','중국어 상담 번역·답변 초안 지원','병원별 FAQ·시술 안내 템플릿','예약금·방문 일정·담당자 상태 관리','시술 전후 안내와 재방문 알림','콘텐츠·채널별 문의·예약·내원 퍼널 분석'],
+  md4Note: 'AI 기반 상담 CRM은 단계적으로 구축 중입니다. 제공 가능한 범위와 도입 단계, 병원별 적용 범위는 상담 시 명확히 안내합니다.',
+  journeyBtn: 'MEDIAT 고객 여정 보기', mdCta: '해외환자 유치 상담하기',
+  jT: '콘텐츠 한 편이 실제 내원으로 이어지는 전 과정을 봅니다.',
+  jEmph: 'MEDIAT의 성과 기준은 조회수가 아니라, 상담 이후 실제 행동의 변화입니다.',
+  journey: [
+    {en:'Discover',ko:'샤오홍슈·숏폼에서 병원 발견'},{en:'Trust',ko:'의료진 퍼스널 브랜딩과 후기형 정보로 신뢰 형성'},
+    {en:'Inquiry',ko:'DM·위챗 등으로 문의'},{en:'Consult',ko:'다국어 상담과 시술 정보 안내'},
+    {en:'Reserve',ko:'예약금·일정 확정'},{en:'Visit',ko:'내원 및 현장 안내'},{en:'Follow-up',ko:'시술 후 안내·재방문 관리'}],
+  dtHeroT1: '중국 고객이 저장한 한국 브랜드가,', dtHeroT2: '실제 여행 동선과 방문·구매로 이어지도록.',
+  dtHeroD: 'DIAT는 국내 F&B, 카페, 뷰티, 웰니스, 관광, 리테일 브랜드를 중화권 소비자에게 맞는 콘텐츠로 재해석합니다.',
+  dtCards: [
+    {t:'중화권 브랜드 포지셔닝',d:'중국 고객이 이해하고 기억할 핵심 가치와 키워드를 정의합니다.'},
+    {t:'샤오홍슈·숏폼 콘텐츠',d:'메뉴, 공간, 체험을 저장하고 싶은 콘텐츠로 제작합니다.'},
+    {t:'퍼스널 브랜딩·UGC',d:'대표자와 브랜드의 이야기를 신뢰 자산으로 만들고 실제 후기를 확산합니다.'},
+    {t:'방한 고객 전환 설계',d:'위치, 예약, 쿠폰, 매장 안내를 여행 동선과 연결해 방문 장벽을 낮춥니다.'}],
+  dtEmph: '단순 번역 홍보가 아니라 검색·저장·동선·방문·구매까지 이어지는 현지화 캠페인을 설계합니다.',
+  dtCta: '우리 매장 중화권 고객 유치 상담하기',
+  prT: '말보다, 함께 만든 변화로 증명하겠습니다.',
+  prSub: '파트너 로고는 사용 권한과 최종 파일을 전달받은 후 게시합니다. 현재는 기관명 텍스트로 표시합니다.',
+  partners: ['신청춘한방병원','그레이스병원','오늘의 치과','한마음병원','청담솔루션의원'],
+  cmpT: '대행 업무를 쌓는 것이 아니라, 고객이 움직이는 구조를 만듭니다.',
+  cmpH0: '구분', cmpH1: '일반 채널 대행',
+  cmpRows: [
+    {k:'시작점',a:'매체와 콘텐츠 수량',b:'현장 문제와 고객 여정'},
+    {k:'목표',a:'노출·조회 중심',b:'문의·예약·방문 전환 중심'},
+    {k:'병원 이해',a:'업종별 공통 운영',b:'병원 마케팅·경영 현장 경험'},
+    {k:'중국 진출',a:'번역·단발성 협찬',b:'퍼스널 브랜딩·현지화·상담 동선 통합'},
+    {k:'관리',a:'채널별 보고서',b:'콘텐츠부터 실제 행동까지 퍼널 점검'},
+    {k:'커뮤니케이션',a:'다수 계정의 표준 관리',b:'파트너별 목표와 현장 이슈 반영'}],
+  cmpNote: 'DIA는 할 수 없는 것을 가능하다고 말하지 않습니다. 현재 제공 범위와 다음 구축 단계를 구분하고, 실행 결과를 데이터로 함께 확인합니다.',
+  procT: '진단부터 실행, 개선까지 같은 팀처럼 움직입니다.',
+  process: [
+    {n:'01',t:'현황 진단',d:'사업, 진료·상품, 채널, 고객 여정을 확인합니다. 산출물 예: 현황 진단 리포트'},
+    {n:'02',t:'성장 전략 설계',d:'국내·중화권 목표와 핵심 KPI를 정의합니다. 산출물 예: 성장 로드맵'},
+    {n:'03',t:'콘텐츠·광고 세팅',d:'메시지, 소재, 계정, 랜딩, 추적 구조를 구축합니다. 산출물 예: 채널 세팅 문서'},
+    {n:'04',t:'상담·방문 연결',d:'문의 응대와 예약·방문 프로세스를 정리합니다. 산출물 예: 상담 스크립트'},
+    {n:'05',t:'성과 분석·개선',d:'채널별 데이터를 확인하고 다음 실험에 반영합니다. 산출물 예: 월간 퍼널 리포트'}],
+  caseT: '사례 구조는 준비되어 있고, 수치는 검증 후 입력합니다.',
+  caseTask: '과제', caseDo: '실행', caseChange: '변화', casePeriod: '기간',
+  cases: [
+    {name:'A 한방병원',task:'검색 후 문의 동선 단절',act:'플레이스·검색광고·랜딩 구조 재정비'},
+    {name:'B 피부과',task:'중화권 콘텐츠 조회수 대비 문의 저조',act:'샤오홍슈 퍼스널 브랜딩과 상담 동선 연결'},
+    {name:'C 브랜드',task:'방한 고객의 매장 방문 전환 부재',act:'숏폼·UGC 캠페인과 방한 동선 안내 설계'}],
+  fOrg: '기관/브랜드명', fOrgP: '예: ㅇㅇ병원', fName: '담당자명', fTel: '연락처', fMail: '이메일',
+  fRole: '직급/직책', fRoleP: '예: 병원장, 마케팅 팀장', fInterest: '관심 서비스', fWorry: '현재 가장 큰 고민', fWorryP: '예: 중국어 콘텐츠는 있는데 문의가 상담으로 이어지지 않습니다.',
+  fBudget: '월 예상 예산', fBudgetNote: '구체 금액은 상담 과정에서 조정할 수 있습니다.',
+  fAgree: '개인정보 수집·이용에 동의합니다. 수집 항목은 상담 회신 목적으로만 사용됩니다.',
+  fSubmit: '성장 상담 요청하기',
+  fPending: '아직 문의 전송 서버가 연결되지 않았습니다. 개발 연결 지점은 아래와 같으며, 지금은 카카오 상담 또는 이메일로 접수됩니다.',
+  fKakao: '카카오 상담 연결', fMailBtn: '이메일로 보내기',
+  interests: ['국내 병원 마케팅','MEDIAT','DIAT','통합 상담'],
+  budgets: ['협의 후 결정','300만원 이하','300~1,000만원','1,000만원 이상'],
+  tabs: ['홈','MEDIAT','DIAT','스토리','문의'],
+  phImg: '병원 현장 사진 / 대표 인터뷰 컷', phRef1: '현장 문제', phRef2: '참고 화면',
+  phNum: '[검증된 수치 입력 예정]', phPeriod: '[프로젝트 기간 입력]'
+};
+
+const ZH = Object.assign({}, KO, {
+  h1a: '以在一线验证的增长策略，', h1b: '把韩国的医疗机构与品牌，', h1c: '连接到中华圈客户。',
+  heroDesc: 'DIA 以从韩医院成长为韩方医院的实战经验为基础，覆盖韩国本地医院营销、中华圈海外患者与访韩客户获取的策略设计与执行。',
+  cta1: '获取我们的增长结构诊断', cta2: '了解 MEDIAT · DIAT',
+  diagTitle: '3分钟增长结构诊断', diagSub: '先一起确认当前的瓶颈环节',
+  mdKo: '中华圈海外患者获取', mdLine: '把浏览量变成患者，\n把咨询变成真实到院。',
+  mdTags: ['小红书个人品牌','多语种咨询运营','预约·到院旅程设计'], mdBtn: '查看 MEDIAT 详情',
+  dtKo: '中华圈访韩客户获取', dtLine: '让中国客户在韩国找到、\n收藏并亲自到店。',
+  dtTags: ['中华圈品牌定位','短视频·UGC 活动','基于访韩动线的引流'], dtBtn: '查看 DIAT 详情',
+  oneCoTitle: '把在韩国积累的一线专业能力，延伸为中华圈市场的增长机会。', aboutBtn: 'DIA 是一家什么样的公司',
+  hospTitle: '在投放广告之前，先设计患者会选择的结构。',
+  hospSub: '了解诊疗现场与医疗广告规范的负责人，梳理医院的优势。',
+  hospShort: [{n:'01',t:'医疗广告审议支持'},{n:'02',t:'Naver Place 设置'},{n:'03',t:'Naver 搜索广告'},{n:'04',t:'Naver GFA'}],
+  hospBtn: '查看本地医院营销服务',
+  hospDesc: '了解诊疗现场与医疗广告规范的负责人梳理医院优势，并按目的连接从搜索到到院所需的各个渠道。',
+  hospCards: [
+    {n:'01',t:'医疗广告审议支持',d:'审查各媒体与素材是否需要审议，设计降低表达风险的文案与投放流程。'},
+    {n:'02',t:'Naver Place 设置',d:'整理诊疗信息、代表关键词、图片、动态与预约动线，减少搜索后的流失。'},
+    {n:'03',t:'Naver 搜索广告',d:'以 PowerLink 为中心的关键词结构、素材 A/B 测试、落地页衔接与转化测量。'},
+    {n:'04',t:'Naver GFA',d:'依据科室与目标患者策划原生·横幅素材，将认知与转化活动分开运营。'}],
+  hospEmph: '不止于制造曝光，每周检查从咨询到到院之间的衔接点。',
+  hospNote: '依据医疗法与媒体政策，不使用保证结果的表达。以审议支持而非代办、以转化结构改善而非业绩保证的方式推进。',
+  partnerTitle: '一起理解现场，一起创造增长。', partnerBtn: '查看全部合作方与案例',
+  storyT1: '从韩医院到韩方医院。', storyT2: 'DIA 起点在一线现场。',
+  storyTeaser: '我们最先在现场确认到：仅靠曝光和浏览量，医院并不会成长。',
+  storyBtn: '阅读创业故事',
+  storyBody: '亲自同时负责医院的营销与经营后我们明白：仅靠曝光或浏览量医院不会成长；只有广告、咨询与现场运营连成一条流程，才会产生真实的营收与复诊。DIA 的成立，是为了让这份经验不止停留在一家医院，而扩展为更多医院与韩国品牌的增长系统。',
+  timeline: [{n:'01',t:'从韩医院运营现场起步'},{n:'02',t:'承担韩方医院成长期的营销与经营实务'},{n:'03',t:'积累本地医院营销专业能力'},{n:'04',t:'扩展至中华圈内容与海外患者获取'},{n:'05',t:'搭建 MEDIAT·DIAT 一体化增长结构'}],
+  finalT1: '现在需要的不是广告产品，', finalT2: '而是让客户真正行动的增长结构。',
+  finalDesc: '本地医院营销、中华圈海外患者获取、访韩客户获取，我们从您当下最急的课题开始一起诊断。',
+  finalBtn: '申请增长咨询', footLine: '始于现场，跨越国境创造增长。',
+  aboutTitle: '把在韩国积累的一线专业能力，延伸为中华圈市场的增长机会。',
+  aboutBody: 'DIA 不是只做媒体投放的公司。我们同时设计患者寻找医院、咨询并到院的真实过程，以及品牌被客户发现并被选择的过程。以本地医院增长经验为基础，为医疗机构提供 MEDIAT，为 F&B·美妆·旅游品牌提供 DIAT 的中华圈客户获取方案。',
+  diaRole: '以医院现场经验为基础，连接本地增长与中华圈扩张的 Growth Operating Company',
+  mdRole: '面向医疗机构。连接中华圈潜在患者的发现、咨询、预约、到院与后续管理。',
+  dtRole: '面向 F&B·咖啡·美妆·健康·旅游·零售品牌。把访韩客户连接到门店到访与购买。',
+  clarify: ['DIA 既是公司也是母品牌。','MEDIAT 与 DIAT 是 DIA 运营的两项专业服务。','本地医院营销是 DIA 在现场积累的基础能力，也是 MEDIAT 的信任依据。'],
+  caps: ['理解医院运营','医疗广告实务','Naver 媒体运营','中华圈内容本地化','海外客户咨询·预约旅程设计'],
+  mdHeroT: '把浏览量变成患者，把咨询变成真实到院。',
+  mdHeroD: '中华圈海外患者获取不止于内容制作，我们把咨询、预约、到院与后续管理作为一条旅程来运营。',
+  md1T1: '小红书浏览量涨了，', md1T2: '为什么预约却没有增加？',
+  md1Body: '只靠翻译帖文和一次性体验团，信任无法累积。医院与医生的专业性需要用中国客户的语言与关注点传达，并设计好从内容走向咨询的动线。',
+  md1Cards: ['把韩式内容简单翻译，与中国客户的搜索意图不符','账号知名度在累积，但医院与医生的信任资产没有留下','只看浏览与收藏数，无法追踪真实咨询与预约转化','达人合作结束，流量也随之停止'],
+  md2T: '中国客户比起广告，先确认可信的人和真实经验。',
+  md2Cards: [
+    {t:'小红书个人品牌',d:'把医生或品牌负责人的观点与专业性，建成可持续的账号资产。'},
+    {t:'中文短视频制作',d:'依据中国用户的钩子方式、搜索关键词与字幕语感进行策划、拍摄与剪辑。'},
+    {t:'内容本地化',d:'不是翻译在韩国有效的信息，而是以中国客户的疑问与顾虑为基准重新设计。'},
+    {t:'咨询转化动线',d:'把帖文、主页、私信、微信与咨询渠道打通，清晰指出下一步行动。'}],
+  md2Emph: '我们设计的不是被曝光的内容，而是让人产生咨询理由的内容。',
+  md3T: '患者咨询之后，医院真正的运营问题才开始。',
+  md3Body: '小红书、微信、私信、KakaoTalk 等渠道分散，翻译与应答延迟，咨询之后的预约与复诊记录留在负责人的个人聊天里。即使组建院内海外患者专职团队，也难以同时管理渠道、人力与结算。',
+  md3Cards: ['咨询渠道分散','反复的人工翻译','诊疗中或夜间的应答延迟','咨询内容与预约信息遗漏','术前后指引与复诊提醒断裂','难以把真实到院·支付成果与内容关联'],
+  md3Note: '左侧为确认现场问题的参考画面位置，并非实际服务界面，最终画面将以 DIA 自有 UI 制作。',
+  md4T: '从引流到后续管理，连接为一条海外患者旅程。',
+  md4Body: 'MEDIAT 不止于中文内容制作与客户引流，而是把多语种咨询、预约、到院与后续管理的数据连接为一条运营流程。',
+  md4Cards: ['多渠道咨询收集与客户信息整理','中文咨询翻译与回复草案支持','各医院 FAQ·项目说明模板','预约金·到访日程·负责人状态管理','术前后指引与复诊提醒','按内容·渠道的咨询·预约·到院漏斗分析'],
+  md4Note: 'AI 咨询 CRM 正在分阶段搭建。可提供范围、引入阶段与各医院适用范围将在咨询时明确说明。',
+  journeyBtn: '查看 MEDIAT 客户旅程', mdCta: '咨询海外患者获取',
+  jT: '我们关注一条内容如何走到真实到院的全过程。',
+  jEmph: 'MEDIAT 的成果标准不是浏览量，而是咨询之后真实行为的变化。',
+  journey: [
+    {en:'Discover',ko:'在小红书·短视频发现医院'},{en:'Trust',ko:'通过医生个人品牌与体验型信息建立信任'},
+    {en:'Inquiry',ko:'通过私信·微信等咨询'},{en:'Consult',ko:'多语种咨询与项目信息说明'},
+    {en:'Reserve',ko:'确定预约金与日程'},{en:'Visit',ko:'到院与现场引导'},{en:'Follow-up',ko:'术后指引与复诊管理'}],
+  dtHeroT1: '让中国客户收藏的韩国品牌，', dtHeroT2: '真正走进行程、到店与购买。',
+  dtHeroD: 'DIAT 把韩国的 F&B、咖啡、美妆、健康、旅游、零售品牌，重新诠释为适合中华圈消费者的内容。',
+  dtCards: [
+    {t:'中华圈品牌定位',d:'定义中国客户能理解并记住的核心价值与关键词。'},
+    {t:'小红书·短视频内容',d:'把菜单、空间与体验制作成让人想收藏的内容。'},
+    {t:'个人品牌·UGC',d:'把创始人与品牌的故事变成信任资产，并扩散真实评价。'},
+    {t:'访韩客户转化设计',d:'把位置、预约、优惠券与门店指引接入旅行动线，降低到店门槛。'}],
+  dtEmph: '不是简单的翻译宣传，而是设计从搜索、收藏、动线到到店与购买的本地化活动。',
+  dtCta: '咨询门店的中华圈客户获取',
+  prT: '不靠说辞，用一起创造的变化来证明。',
+  prSub: '合作方标识将在获得使用授权与最终文件后展示，目前以机构名称文字呈现。',
+  cmpT: '不是堆叠代运营工作，而是建立让客户行动的结构。',
+  cmpH0: '项目', cmpH1: '一般渠道代运营',
+  cmpRows: [
+    {k:'起点',a:'媒体与内容数量',b:'现场问题与客户旅程'},
+    {k:'目标',a:'以曝光·浏览为中心',b:'以咨询·预约·到访转化为中心'},
+    {k:'医院理解',a:'各行业通用运营',b:'医院营销与经营的现场经验'},
+    {k:'进入中国',a:'翻译与一次性合作',b:'个人品牌·本地化·咨询动线一体化'},
+    {k:'管理',a:'按渠道的报告',b:'从内容到真实行为的漏斗检查'},
+    {k:'沟通',a:'多账号的标准化管理',b:'反映各合作方目标与现场问题'}],
+  cmpNote: 'DIA 不会把做不到的事说成可能。我们区分当前可提供范围与下一步搭建阶段，并用数据一起确认执行结果。',
+  procT: '从诊断到执行与改善，像同一个团队一样运作。',
+  process: [
+    {n:'01',t:'现状诊断',d:'确认业务、诊疗·产品、渠道与客户旅程。产出示例：现状诊断报告'},
+    {n:'02',t:'增长策略设计',d:'定义本地与中华圈目标及核心 KPI。产出示例：增长路线图'},
+    {n:'03',t:'内容·广告搭建',d:'搭建信息、素材、账号、落地页与追踪结构。产出示例：渠道搭建文档'},
+    {n:'04',t:'咨询·到访衔接',d:'梳理咨询应答与预约·到访流程。产出示例：咨询脚本'},
+    {n:'05',t:'成果分析·改善',d:'确认各渠道数据并反映到下一轮实验。产出示例：月度漏斗报告'}],
+  caseT: '案例结构已备好，数值将在验证后填入。',
+  caseTask: '课题', caseDo: '执行', caseChange: '变化', casePeriod: '周期',
+  cases: [
+    {name:'A 韩方医院',task:'搜索之后的咨询动线断裂',act:'重整 Place·搜索广告·落地页结构'},
+    {name:'B 皮肤科',task:'中华圈内容浏览量高但咨询少',act:'小红书个人品牌与咨询动线衔接'},
+    {name:'C 品牌',task:'访韩客户缺少到店转化',act:'短视频·UGC 活动与访韩动线指引设计'}],
+  fOrg: '机构/品牌名称', fOrgP: '例：ㅇㅇ医院', fName: '负责人姓名', fTel: '联系方式', fMail: '邮箱',
+  fRole: '职位/职务', fRoleP: '例：院长、营销负责人', fInterest: '关注的服务', fWorry: '当前最大的困扰', fWorryP: '例：已有中文内容，但咨询没有转化为面诊。',
+  fBudget: '月度预算范围', fBudgetNote: '具体金额可在咨询过程中调整。',
+  fAgree: '同意收集与使用个人信息。收集项目仅用于咨询回复目的。',
+  fSubmit: '申请增长咨询',
+  fPending: '咨询发送服务器尚未连接。开发对接位置如下，目前通过 Kakao 咨询或邮件受理。',
+  fKakao: '连接 Kakao 咨询', fMailBtn: '通过邮件发送',
+  interests: ['本地医院营销','MEDIAT','DIAT','综合咨询'],
+  budgets: ['咨询后决定','300万韩元以下','300~1,000万韩元','1,000万韩元以上'],
+  tabs: ['首页','MEDIAT','DIAT','品牌故事','咨询'],
+  phImg: '医院现场照片 / 创始人访谈镜头', phRef1: '现场问题', phRef2: '参考画面',
+  phNum: '[待填入已验证数据]', phPeriod: '[待填入项目周期]'
+});
+const NAVDEF = [
+  { k: 'about', ko: 'DIA', zh: 'DIA' },
+  { k: 'hospital', ko: '서비스', zh: '服务' },
+  { k: 'mediat', ko: 'MEDIAT', zh: 'MEDIAT' },
+  { k: 'diat', ko: 'DIAT', zh: 'DIAT' },
+  { k: 'story', ko: '창업 스토리', zh: '创业故事' },
+  { k: 'contact', ko: '문의하기', zh: '联系咨询' }
+];
+const FOOTDEF = [
+  { k: 'about', ko: '회사소개', zh: '公司介绍' },
+  { k: 'mediat', ko: 'MEDIAT', zh: 'MEDIAT' },
+  { k: 'diat', ko: 'DIAT', zh: 'DIAT' },
+  { k: 'contact', ko: '문의하기', zh: '联系咨询' },
+  { k: 'contact', ko: '개인정보처리방침', zh: '隐私政策' }
+];
+const EXTRA = {
+  ko: { hvDia: '현장 기반 성장 전략', hvMd: '해외환자 유치', hvDt: '방한 고객 유치', topCta: '성장 상담하기' },
+  zh: { hvDia: '基于现场的增长策略', hvMd: '海外患者获取', hvDt: '访韩客户获取', topCta: '预约增长咨询' }
+};
+
+class Component extends DCLogic {
+  rootRef = React.createRef();
+  state = {
+    w: 1440, lang: this.props.defaultLang === '中文' ? 'zh' : 'ko',
+    scrolled: false, navOpen: false, open: 0,
+    org: '', name: '', role: '', tel: '', mail: '', worry: '', interest: '', budget: '', agree: false, sent: false
+  };
+
+  root() {
+    if (this._root && this._root.isConnected) return this._root;
+    const byRef = this.rootRef && this.rootRef.current;
+    const el = byRef
+      || document.getElementById('dc-root')
+      || (document.querySelector('[data-anchor="hero"]') || {}).parentElement
+      || document.body;
+    this._root = el;
+    return el;
+  }
+
+  measure() {
+    const el = this.root();
+    const w = Math.round((el && el.clientWidth) || window.innerWidth || 1440);
+    if (Math.abs(w - this.state.w) > 2) this.setState({ w });
+  }
+
+  componentDidMount() {
+    const el = this.root();
+    this.measure();
+    if (window.ResizeObserver && el) {
+      this.ro = new ResizeObserver(() => this.measure());
+      this.ro.observe(el);
+    }
+    this.onResize = () => this.measure();
+    window.addEventListener('resize', this.onResize);
+    this.sp = this.scrollParent(el);
+    this.onScroll = e => {
+      if (e) this.gotScroll = true;
+      const t = this.sp === window ? window.scrollY : this.sp.scrollTop;
+      const s = t > 24;
+      if (s !== this.state.scrolled) this.setState({ scrolled: s });
+    };
+    (this.sp === window ? window : this.sp).addEventListener('scroll', this.onScroll, { passive: true });
+    this.t0 = setTimeout(() => this.measure(), 120);
+    // some embedded contexts never dispatch scroll events — poll as a fallback
+    this.poll = setInterval(() => { if (!this.gotScroll) this.onScroll(); }, 250);
+  }
+
+  componentWillUnmount() {
+    if (this.ro) this.ro.disconnect();
+    if (this.t0) clearTimeout(this.t0);
+    if (this.poll) clearInterval(this.poll);
+    window.removeEventListener('resize', this.onResize);
+    if (this.sp) (this.sp === window ? window : this.sp).removeEventListener('scroll', this.onScroll);
+  }
+
+  scrollParent(el) {
+    let p = el.parentElement;
+    while (p) {
+      const o = getComputedStyle(p).overflowY;
+      if ((o === 'auto' || o === 'scroll') && p.scrollHeight > p.clientHeight + 4) return p;
+      p = p.parentElement;
+    }
+    return window;
+  }
+
+  goTo(id) {
+    this.setState({ navOpen: false });
+    const root = this.root();
+    const el = (root && root.querySelector('[data-anchor="' + id + '"]'))
+      || document.querySelector('[data-anchor="' + id + '"]');
+    if (!el) return;
+    if (!this.sp) this.sp = this.scrollParent(root || el);
+    const r = el.getBoundingClientRect();
+    const off = this.state.w < 960 ? 64 : 76;
+    const box = this.sp && this.sp !== window ? this.sp : window;
+    const cur = () => (box === window ? window.scrollY : box.scrollTop);
+    const base = box === window ? 0 : box.getBoundingClientRect().top;
+    const target = Math.max(0, cur() + r.top - base - off);
+    const from = cur();
+    box.scrollTo({ top: target, behavior: 'smooth' });
+    // some embedded/scaled contexts ignore smooth scrolling — fall back to an instant jump
+    setTimeout(() => { if (Math.abs(cur() - from) < 2) box.scrollTo({ top: target }); }, 320);
+  }
+
+  chip(active, hue) {
+    return active
+      ? 'font:600 13px Pretendard,sans-serif;color:#fff;background:' + hue + ';padding:10px 15px;border-radius:11px;cursor:pointer'
+      : 'font:500 13px Pretendard,sans-serif;color:#344054;background:#F7F7F5;border:1px solid rgba(18,23,34,.1);padding:9px 14px;border-radius:11px;cursor:pointer';
+  }
+
+  renderVals() {
+    const s = this.state;
+    const c = Object.assign({}, s.lang === 'ko' ? KO : ZH, EXTRA[s.lang]);
+    const accent = this.props.accent || '#6653D9';
+    const isMob = s.w < 960;
+    const dark = s.scrolled || isMob;
+    const navKeys = ['hero', 'about', 'story', 'hospital', 'mediat', 'journey', 'diat', 'why', 'process', 'cases', 'contact'];
+    const nav = {};
+    navKeys.forEach(k => { nav[k] = () => this.goTo(k); });
+    const canSubmit = s.org.trim() && s.name.trim() && (s.tel.trim() || s.mail.trim()) && s.agree;
+    const set = k => e => this.setState({ [k]: e.target.value });
+    const langBtn = on => on
+      ? 'font:600 12px Pretendard,sans-serif;color:#fff;background:#121722;padding:6px 12px;border-radius:99px;cursor:pointer'
+      : 'font:600 12px Pretendard,sans-serif;color:#667085;padding:6px 12px;border-radius:99px;cursor:pointer';
+
+    return {
+      c, rootRef: this.rootRef,
+      isDesk: !isMob, isMob,
+      journeyH: s.w >= 1100, journeyV: s.w < 1100,
+      tableWide: s.w >= 760, tableNarrow: s.w < 760,
+      headStyle: 'position:sticky;top:0;z-index:50;height:' + (isMob ? 64 : 76) + 'px;'
+        + (s.scrolled
+          ? 'background:rgba(255,255,255,.92);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(18,23,34,.08),0 6px 20px rgba(8,20,38,.06)'
+          : 'background:rgba(255,255,255,.6);backdrop-filter:blur(8px);box-shadow:none')
+        + ';transition:background .25s,box-shadow .25s',
+      logoStyle: 'height:' + (isMob ? 22 : 26) + 'px;width:auto;display:block',
+      langWrap: 'display:flex;background:#F1F0EC;border-radius:99px;padding:3px;flex:none',
+      koTab: langBtn(s.lang === 'ko'), zhTab: langBtn(s.lang === 'zh'),
+      setKo: () => this.setState({ lang: 'ko' }), setZh: () => this.setState({ lang: 'zh' }),
+      nav, topCta: c.topCta,
+      navItems: NAVDEF.map(n => ({
+        label: n[s.lang], on: () => this.goTo(n.k),
+        style: 'font:600 14.5px Pretendard,sans-serif;color:#121722;cursor:pointer;white-space:nowrap'
+      })),
+      footLinks: FOOTDEF.map(n => ({ label: n[s.lang], on: () => this.goTo(n.k) })),
+      navOpen: s.navOpen,
+      toggleNav: () => this.setState(st => ({ navOpen: !st.navOpen })),
+      burger: 'width:42px;height:42px;border-radius:12px;border:1px solid rgba(18,23,34,.12);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;cursor:pointer;background:#fff',
+      burgerLine: 'width:16px;height:1.6px;background:#121722',
+      logos: [
+        { src: 'assets/p-chungchun.png', alt: '신청춘한방병원', bg: '#FFFFFF', ratio: 0 },
+        { src: 'assets/p-grays.png', alt: "Gray's 그레이스 피부과의원", bg: '#9E9990', ratio: 200 / 72 },
+        { src: 'assets/p-hanmaeum.png', alt: '한마음의료원', bg: '#0B2C55', ratio: 240 / 87 },
+        { src: 'assets/p-cellin.png', alt: 'CELLIN CLINIC', bg: '#002FC4', ratio: 0 },
+        { src: 'assets/p-today.png', alt: '오늘의치과', bg: '#FFFFFF', ratio: 0 },
+        { src: 'assets/p-sollution.png', alt: 'SOLLUTION CLINIC', bg: '#F3ECE4', ratio: 0 }
+      ].concat([
+        { src: 'assets/p-chungchun.png', alt: '', bg: '#FFFFFF', ratio: 0 },
+        { src: 'assets/p-grays.png', alt: '', bg: '#9E9990', ratio: 200 / 72 },
+        { src: 'assets/p-hanmaeum.png', alt: '', bg: '#0B2C55', ratio: 240 / 87 },
+        { src: 'assets/p-cellin.png', alt: '', bg: '#002FC4', ratio: 0 },
+        { src: 'assets/p-today.png', alt: '', bg: '#FFFFFF', ratio: 0 },
+        { src: 'assets/p-sollution.png', alt: '', bg: '#F3ECE4', ratio: 0 }
+      ]).map(function (l) {
+        var H = 88, fill = l.ratio > 0;
+        var light = l.bg === '#FFFFFF' || l.bg === '#F3ECE4' || l.bg === '#9E9990';
+        return Object.assign({}, l, {
+          card: 'box-sizing:border-box;display:flex;align-items:center;justify-content:center;height:' + H + 'px;width:' + (fill ? Math.round(H * l.ratio) : 200) + 'px;'
+            + 'padding:' + (fill ? '0' : '16px 22px') + ';background:' + l.bg
+            + ';border:1px solid ' + (light ? 'rgba(18,23,34,.12)' : 'rgba(255,255,255,.14)') + ';',
+          img: fill
+            ? 'width:100%;height:100%;object-fit:cover;display:block'
+            : 'width:100%;height:100%;object-fit:contain;display:block'
+        });
+      }),
+      journeySteps: c.journey.map((j, i) => Object.assign({}, j, {
+        n: '0' + (i + 1),
+        bg: 'linear-gradient(120deg,#0B3B75,' + ['#0B3B75', '#1256A0', '#1577FF', '#2E90FF', '#4FA9F5', '#10C5D6', '#6653D9'][i] + ')'
+      })),
+      procSteps: c.process.map((p, i) => Object.assign({}, p, {
+        open: s.open === i, icon: s.open === i ? '−' : '+',
+        on: () => this.setState(st => ({ open: st.open === i ? -1 : i }))
+      })),
+      interests: c.interests.map(label => ({
+        label, on: () => this.setState({ interest: label }), style: this.chip(s.interest === label, accent)
+      })),
+      budgets: c.budgets.map(label => ({
+        label, on: () => this.setState({ budget: label }), style: this.chip(s.budget === label, '#121722')
+      })),
+      f: {
+        org: s.org, name: s.name, role: s.role, tel: s.tel, mail: s.mail, worry: s.worry,
+        setOrg: set('org'), setName: set('name'), setRole: set('role'), setTel: set('tel'), setMail: set('mail'), setWorry: set('worry')
+      },
+      agree: s.agree,
+      toggleAgree: () => this.setState(st => ({ agree: !st.agree })),
+      agreeBox: s.agree
+        ? 'width:22px;height:22px;flex:none;border-radius:7px;background:' + accent + ';color:#fff;display:grid;place-items:center;font:700 12px Manrope,sans-serif'
+        : 'width:22px;height:22px;flex:none;border-radius:7px;border:1px solid rgba(18,23,34,.2);color:transparent;display:grid;place-items:center;font:700 12px Manrope,sans-serif',
+      submitStyle: canSubmit
+        ? 'height:56px;border-radius:14px;background:' + accent + ';color:#fff;display:grid;place-items:center;font:700 15px Pretendard,sans-serif;cursor:pointer;box-shadow:0 10px 24px rgba(102,83,217,.26)'
+        : 'height:56px;border-radius:14px;background:#EDEBE6;color:#98A2B3;display:grid;place-items:center;font:700 15px Pretendard,sans-serif;cursor:not-allowed',
+      submit: () => { if (canSubmit) this.setState({ sent: true }); },
+      showSent: s.sent
+    };
+  }
+}
+</script>
+</body>
+</html>
